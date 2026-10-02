@@ -96,9 +96,11 @@ async function build() {
     await Bun.write("dist/sounds.json", JSON.stringify(catalog));
     console.log("Wrote dist/sounds.json");
 
-    const html = await Bun.file("index.html").text();
-    await Bun.write("dist/index.html", html);
-    console.log("Wrote dist/index.html");
+    for (const asset of ["index.html", "styles.css", "app.js"]) {
+        const content = await Bun.file(asset).text();
+        await Bun.write("dist/" + asset, content);
+        console.log("Wrote dist/" + asset);
+    }
 }
 
 build().catch((err) => {

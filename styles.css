@@ -1,0 +1,179 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: ui-monospace, "Cascadia Code", "Fira Code", Menlo, monospace;
+    padding: 2rem;
+    background: light-dark(#fff, #111);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+#title {
+    margin-left: auto;
+}
+
+#search {
+    font: inherit;
+    background: light-dark(#f6f6f6, #222);
+    color: light-dark(#333, #ccc);
+    border: 1px solid light-dark(#ddd, #333);
+    padding: 0.4rem 0.6rem;
+    width: 300px;
+}
+
+#search:focus {
+    outline: none;
+}
+
+#controls {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    align-items: center;
+}
+
+#controls label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#controls .label-name {
+    color: light-dark(#111, #e0e0e0);
+}
+
+#controls .label-value {
+    color: light-dark(#999, #555);
+}
+
+#controls input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 18px;
+    background: transparent;
+    cursor: pointer;
+    --track-bg: light-dark(#d4d4d4, #1c1c1c);
+    --tick: light-dark(#ffffff, #555555);
+    --thumb: light-dark(#2563eb, #60a5fa);
+}
+
+#controls input[type="range"]:focus {
+    outline: none;
+}
+
+/* One divider per step: pitch has (2 - 0.1) / 0.1 = 19 steps. */
+#pitch {
+    --div: 5.26315789%;
+}
+
+/* Volume has (1 - 0) / 0.1 = 10 steps. */
+#volume {
+    --div: 10%;
+}
+
+#controls input[type="range"]::-webkit-slider-runnable-track {
+    height: 12px;
+    background-color: var(--track-bg);
+    background-image: repeating-linear-gradient(to right,
+        transparent 0 calc(var(--div) - 1px),
+        var(--tick) calc(var(--div) - 1px) var(--div));
+}
+
+#controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 18px;
+    margin-top: -3px;
+    background: var(--thumb);
+    border: none;
+    border-radius: 2px;
+}
+
+#controls input[type="range"]::-moz-range-track {
+    height: 12px;
+    background-color: var(--track-bg);
+    background-image: repeating-linear-gradient(to right,
+        transparent 0 calc(var(--div) - 1px),
+        var(--tick) calc(var(--div) - 1px) var(--div));
+}
+
+#controls input[type="range"]::-moz-range-progress {
+    height: 12px;
+    background: transparent;
+}
+
+#controls input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 18px;
+    background: var(--thumb);
+    border: none;
+    border-radius: 2px;
+}
+
+#title h1 {
+    font-size: 0.9rem;
+    margin: 0;
+    color: light-dark(#111, #e0e0e0);
+    text-align: right;
+}
+
+#title p {
+    font-size: 0.8rem;
+    margin: 0;
+    color: light-dark(#999, #555);
+    text-align: right;
+}
+
+#app {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid light-dark(#ddd, #333);
+    padding: 0.5rem 1rem;
+    outline: none;
+}
+
+.sound {
+    cursor: pointer;
+    color: light-dark(#999, #555);
+    user-select: none;
+    position: relative;
+}
+
+.sound .copied-hint {
+    display: none;
+    position: absolute;
+    top: 0;
+    color: light-dark(#999, #555);
+    white-space: nowrap;
+}
+
+.sound.show-copied .copied-hint {
+    display: inline;
+}
+
+.sound.show-copied-flash .copied-hint {
+    color: light-dark(#2563eb, #60a5fa);
+}
+
+.sound:hover {
+    color: light-dark(#111, #e0e0e0);
+}
+
+.sound.playing {
+    color: light-dark(#2563eb, #60a5fa);
+}
