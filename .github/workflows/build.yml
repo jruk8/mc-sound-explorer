@@ -1,8 +1,6 @@
 name: Build and Deploy
 
 on:
-  schedule:
-    - cron: "0 */12 * * *" # every 12 hours
   push:
     branches: [main]
   workflow_dispatch:
